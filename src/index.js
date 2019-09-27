@@ -38,7 +38,27 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    const MORSE_SYMBOLS = {
+        '10': '.',
+        '11': '-',
+    }
+    const space = '**********';
+    const reg10 = /.{1,10}/g;
+    const reg2 = /.{1,2}/g;
+
+    const dotTire = array => 
+        array.filter(el => MORSE_SYMBOLS[el]).map(el => el = MORSE_SYMBOLS[el]).join('');
+    
+    const res = array => {
+        for (let i = 0; i < array.length; i++){
+            if(array[i] != space){
+                array[i] = dotTire(array[i].match(reg2))
+            }else array[i] = ' ';
+        }
+        return array.map(el => el = el === ' ' ? ' ' : MORSE_TABLE[el]).join('');        
+    }
+
+    return res(expr.match(reg10));
 }
 
 module.exports = {
